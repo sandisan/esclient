@@ -30,7 +30,7 @@ public class LogServiceController {
 	public String getLogs() {
 		 try {
 				RestTemplate template = new RestTemplate();
-				String url = "https://elasticsearch.ibm-common-services.svc:9200/_cluster/health?wait_for_status=yellow&timeout=50s&pretty";
+				String url = "https://172.21.193.57:9200/_cluster/health?wait_for_status=yellow&timeout=50s&pretty";
 				ResponseEntity<String> response = template.getForEntity(url, String.class);
 				
 				System.out.println(response.getBody());
