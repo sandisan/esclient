@@ -61,8 +61,8 @@ public class LogServiceController {
 		char[] password = "elk".toCharArray();
 		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ "+ System.getProperty("java.class.path"));
 		SSLContext sslContext = SSLContextBuilder.create()
-				//.loadKeyMaterial(keyStore("classpath:elk.jks", password), password)
-				.loadKeyMaterial(keyStore(System.getProperty("user.dir")+"/target/classes/elk.jks", password), password)
+				.loadKeyMaterial(keyStore("classpath:elk.jks", password), password)
+				//.loadKeyMaterial(keyStore(System.getProperty("user.dir")+"/target/classes/elk.jks", password), password)
 				.loadTrustMaterial(null, new TrustSelfSignedStrategy()).build();
 		System.out.println("############# SSLContext set ###########");
 		HttpClient client = HttpClients.custom().setSSLContext(sslContext).build();
