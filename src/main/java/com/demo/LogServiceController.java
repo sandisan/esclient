@@ -75,16 +75,18 @@ public class LogServiceController {
 	public String getLogs() {
 		 try {
 				//RestTemplate template = new RestTemplate();
-				String url = "https://elasticsearch:9200/_cluster/health";
+				String url = "https://elasticsearch.ibm-common-services.svc:9200/_cluster/health";
 				//String url = "https://elasticsearch.ibm-common-services.svc/_cluster/health";
 				ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
 				
 				System.out.println(response.getBody());
 				return response.getBody();
 		       }catch(Exception e) {
-		    	   e.printStackTrace();
+			 String stacktrace = e.printStackTrace()
+			 return stacktrace;
+		    	 // e.printStackTrace();
 		       }
-		 return "Failure";
+		 
 		
 	}
 
