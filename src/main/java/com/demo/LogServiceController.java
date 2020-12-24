@@ -80,8 +80,10 @@ public class LogServiceController {
 		
 
 		SSLContext sslContext = SSLContextBuilder.create()
-				.loadKeyMaterial(keyStore("/deployments/elk.jks", password), password)
+				//.loadKeyMaterial(keyStore("/deployments/elk.jks", password), password)
+			 	.loadTrustMaterial(ResourceUtils.getFile("/deployments/elk.jks"), password)
 				.loadTrustMaterial(null, new TrustSelfSignedStrategy()).build();
+		               
 		System.out.println("############# SSLContext set ###########");
 		HttpClient client = HttpClients.custom().setSSLContext(sslContext).build();
 
