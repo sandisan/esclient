@@ -51,6 +51,7 @@ public class LogServiceController {
 			requestFactory.setHttpClient(httpClient);
 			
 			RestTemplate restTemplate = new RestTemplate(requestFactory);
+			String url = "https://elasticsearch.ibm-common-services.svc:9200/_cluster/health?wait_for_status=yellow&timeout=50s&pretty";
 			ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
 				
 			System.out.println(response.getBody());
