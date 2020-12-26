@@ -33,20 +33,29 @@ public class LogServiceController {
 	@GetMapping(value="/get")
 	public String getLogs() {
 		 try {
-		     CloseableHttpClient httpClient
-                = HttpClients.custom()
-                .setSSLHostnameVerifier(new NoopHostnameVerifier())
-                .build();
-				HttpComponentsClientHttpRequestFactory requestFactory
-						= new HttpComponentsClientHttpRequestFactory();
-				requestFactory.setHttpClient(httpClient);
-				RestTemplate restTemplate = new RestTemplate(requestFactory);
-				//RestTemplate template = new RestTemplate();
-				String url = "https://elasticsearch.ibm-common-services.svc:9200/_cluster/health?wait_for_status=yellow&timeout=50s&pretty";
-				ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
+			TrustStrategy acceptingTrustStrategy = (X509Certificate[] chain, String authType) -> true;
+
+			SSLContext sslContext = org.apache.http.ssl.SSLContexts.custom()
+				.loadTrustMaterial(null, acceptingTrustStrategy)
+				.build();
+
+			SSLConnectionSocketFactory csf = new SSLConnectionSocketFactory(sslContext);
+
+			CloseableHttpClient httpClient = HttpClients.custom()
+				.setSSLSocketFactory(csf)
+				.build();
+
+			HttpComponentsClientHttpRequestFactory requestFactory =
+				new HttpComponentsClientHttpRequestFactory();
+
+			requestFactory.setHttpClient(httpClient);
+			
+			RestTemplate restTemplate = new RestTemplate(requestFactory);
+			ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
 				
-				System.out.println(response.getBody());
-				return response.getBody();
+			System.out.println(response.getBody());
+			 
+			return response.getBody();
 		       }catch(Exception e) {
 					e.printStackTrace();
 					return e.getMessage();
