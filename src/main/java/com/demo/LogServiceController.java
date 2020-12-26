@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.apache.http.conn.ssl.NoopHostnameVerifier;
+import org.apache.http.ssl.*;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
@@ -35,7 +35,7 @@ public class LogServiceController {
 		 try {
 			TrustStrategy acceptingTrustStrategy = (X509Certificate[] chain, String authType) -> true;
 
-			SSLContext sslContext = org.apache.http.ssl.SSLContexts.custom()
+			SSLContext sslContext = SSLContexts.custom()
 				.loadTrustMaterial(null, acceptingTrustStrategy)
 				.build();
 
