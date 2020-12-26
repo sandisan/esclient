@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.apache.http.ssl.SSLContexts;
 import java.security.cert.*;
-//import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLContext;
 import org.apache.http.conn.ssl.TrustStrategy;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.impl.client.CloseableHttpClient;
