@@ -75,7 +75,7 @@ public class LogServiceController {
 			ResponseEntity<String> response = template.getForEntity(url, String.class);
 
 			System.out.println(response.getBody());
-			return response.getBody()
+			return response.getBody();
 		       }catch(Exception e) {
 					e.printStackTrace();
 					return e.getMessage();
