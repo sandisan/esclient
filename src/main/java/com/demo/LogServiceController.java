@@ -36,9 +36,10 @@ public class LogServiceController {
 				System.out.println(response.getBody());
 				return response.getBody();
 		       }catch(Exception e) {
-		    	   e.printStackTrace();
+		    	  e.printStackTrace();
+			  return e.getMessage();
 		       }
-		 return "Failure";
+		 //return "Failure";
 		
 	}
 
